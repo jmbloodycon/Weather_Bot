@@ -7,12 +7,14 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Bot extends TelegramLongPollingBot {
     public static void main(String[] args) {
         System.getProperties().put( "proxySet", "true" );
         System.getProperties().put( "socksProxyHost", "127.0.0.1" );
-        System.getProperties().put( "socksProxyPort", "9150" );
+        System.getProperties().put( "socksProxyPort", "10150" );
         ApiContextInitializer.init();
         TelegramBotsApi botApi = new TelegramBotsApi();
         try {
@@ -43,7 +45,14 @@ public class Bot extends TelegramLongPollingBot {
                 case "/help":
                     sendMessage(message, "Я бот прогноз погоды. Просто набери название города, в котором тебя интерисует погода, и я покажу ее тебе.");
                     break;
+                case "/start":
+                    sendMessage(message, "Введитие название города, в котором хотите узнать погоду");
+                    break;
                 default:
+                    if (message.getText().indexOf('/') == 0) {
+                        sendMessage(message, "Неизвестная команда");
+                        break;
+                    }
                     try {
                         sendMessage(message, Weather.getWeather(message.getText(), model));
                     } catch (IOException e) {
@@ -58,6 +67,12 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     public String getBotToken() {
-        return "";
+        String token = "";
+        try {
+            token = Files.readString(Paths.get("token.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return token;
     }
 }

@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class WeatherTest {
     @Test
-    public void getWeathe() throws IOException {
+    public void getWeather() throws IOException {
         Model model = new Model();
         Weather weather = new Weather();
         String result = Weather.getWeather("Екатеринбург", model);
