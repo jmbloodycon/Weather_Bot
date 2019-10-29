@@ -1,30 +1,39 @@
-public class Model {
+class Model {
 
     private String name;
     private Double temp;
     private Double humidity;
+    private String icon;
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    void setName(String name) {
         this.name = name;
     }
 
-    public Double getTemp() {
+    Double getTemp() {
         return temp;
     }
 
-    public void setTemp(Double temp) {
+    void setTemp(Double temp) {
         this.temp = temp;
     }
 
-    public Double getHumidity() {
+    Double getHumidity() {
         return humidity;
     }
 
-    public void setHumidity(Double humidity) {
+    void setHumidity(Double humidity) {
         this.humidity = humidity;
+    }
+
+    String getIcon() {
+        return icon;
+    }
+
+    void setIcon(String icon) {
+        this.icon = icon;
     }
 }
