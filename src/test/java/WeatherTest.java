@@ -6,13 +6,24 @@ import java.io.IOException;
 
 public class WeatherTest {
     @Test
-    public void getWeather() throws IOException {
+    public void getWeatherRu() throws IOException {
         Model model = new Model();
-        Weather weather = new Weather();
-        String result = Weather.getWeather("Екатеринбург", model);
+        Weather.getWeather("Екатеринбург", model);
         String city = "Yekaterinburg";
-        //запускаем тест, в случае если список expected и actual не будут равны
-        //тест будет провален, о результатах теста читаем в консоли
         Assert.assertEquals(city, model.getName());
+    }
+
+    @Test
+    public void getWeatherEn() throws IOException {
+        Model model = new Model();
+        Weather.getWeather("Yekaterinburg", model);
+        String city = "Yekaterinburg";
+        Assert.assertEquals(city, model.getName());
+    }
+
+    @Test
+    public void getBotName() throws IOException {
+        Bot bot = new Bot();
+        Assert.assertEquals("PopeelaBot", bot.getBotUsername());
     }
 }
