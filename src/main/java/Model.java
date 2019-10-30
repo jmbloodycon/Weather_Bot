@@ -4,6 +4,8 @@ class Model {
     private Double temp;
     private Double humidity;
     private String icon;
+    private Double speed;
+    private Integer id;
 
     String getName() {
         return name;
@@ -35,5 +37,21 @@ class Model {
 
     void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    Double getSpeed() {
+        return speed;
+    }
+
+    void setSpeed(Double speed) {
+        this.speed = speed;
+    }
+
+    Integer getId() {
+        return id;
+    }
+
+    void setId(Integer id) {
+        this.id = id;
     }
 }
