@@ -65,7 +65,14 @@ public class Bot extends TelegramLongPollingBot {
                         break;
                     }
                     try {
-                        String[] weather = Weather.getWeather(message.getText(), model);
+                        String[] weather;
+                        try {
+                            weather = Weather.getWeather(message.getText(), model);
+
+                        } catch (IOException e) {
+                            String city = Translate.translate(message.getText());
+                            weather = Weather.getWeather(city, model);
+                        }
                         sendMessage(message, weather[0]);
                         sendPicture(message, weather[1]);
                         sendMessage(message, "\uD83D\uDC60 Советуем одеться примерно так:");
