@@ -10,12 +10,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Translate {
-    private static int i = 0;
+    private static final String urlStr = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + Translate.getToken();
 
     static String translate(String input) throws IOException {
-
-        String urlStr = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + Files.readString(Paths.get("translateToken.txt"));
-        URL urlObj = new URL(urlStr);
+        URL urlObj = new URL(Translate.urlStr);
         HttpsURLConnection connection = (HttpsURLConnection) urlObj.openConnection();
         connection.setRequestMethod("POST");
         connection.setDoOutput(true);
@@ -27,7 +25,17 @@ public class Translate {
         int start = json.indexOf("[");
         int end = json.indexOf("]");
         String translated = json.substring(start + 2, end - 1);
-        i++;
         return translated;
+    }
+
+    private static String getToken() {
+        String token = "";
+        try {
+            token = Files.readString(Paths.get("translateToken.txt"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return token;
     }
 }
