@@ -33,11 +33,9 @@ class FavoriteCitiesForUsers {
     }
 
     void setCities(Message message) {
-        String[] splitText = message.getText().split(" ");
+        String[] splitText = message.getText().split("[0-9]\\.");
         String[] cities = new String[4];
-        for (int i = 0; i < 4; i++) {
-            cities[i] = (splitText[i * 2 + 1]);
-        }
+        System.arraycopy(splitText, 1, cities, 0, 4);
 
         favoriteCitiesForUsers.put(message.getChatId().toString(), cities);
         try {

@@ -111,7 +111,7 @@ public class Bot extends TelegramLongPollingBot {
                         break;
                     }
 
-                    if (message.getText().indexOf('1') == 0
+                    if (Character.isDigit(message.getText().charAt(0))
                             && lastMessage.get(message.getChatId()).equals("/set_favorite_city")) {
                         favoriteCities.setCities(message);
                         sendMessage(message, "\u2705 Список изменен");
