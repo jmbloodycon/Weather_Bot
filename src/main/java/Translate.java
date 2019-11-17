@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class Translate {
+class Translate {
     private static final String urlStr = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + Translate.getToken();
 
     static String translate(String input) throws IOException {
