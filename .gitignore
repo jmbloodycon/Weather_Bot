@@ -2,3 +2,9 @@
 token.txt
 translateToken.txt
 cities.txt
+.DS_Store
+lib
+TelegramBotApi.iml
+Bot.iml
+target
+pom.xml
