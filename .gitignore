@@ -2,3 +2,8 @@
 token.txt
 translateToken.txt
 cities.txt
+.DS_Store
+lib
+*.iml
+target
+*.xml
