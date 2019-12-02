@@ -41,9 +41,9 @@ class Weather {
         String icon = new Icons()
                 .icons
                 .get(model.getIcon());
-        String clothes =  new Clothes()
-                .clothes
-                .get(model.getId());
-        return (new String[] {info, icon, clothes});
+        Clothes clothes =  new Clothes();
+        String clothe = clothes.getIm(model.getId(), model.getSpeed(), model.getTemp());
+
+        return (new String[] {info, icon, clothe});
     }
 }
