@@ -128,8 +128,7 @@ public class Bot extends TelegramLongPollingBot {
                         }
 
                         sendPicture(message, weather[0], weather[1]);
-                        sendMessage(message, "\uD83D\uDC60 Советуем одеться примерно так:");
-                        sendMessage(message, weather[2]);
+                        sendPicture(message, "\uD83D\uDC60 Советуем одеться примерно так", weather[2]);
                     } catch (IOException e) {
                         sendMessage(message, "\u274C Город не найден!");
                     }
