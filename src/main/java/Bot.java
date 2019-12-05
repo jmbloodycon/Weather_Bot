@@ -10,8 +10,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -142,12 +140,11 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     public String getBotToken() {
-        String token = "";
-        try {
-            token = Files.readString(Paths.get("token.txt"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return token;
+        //        try {
+//            token = Files.readString(Paths.get("token.txt"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        return System.getenv("TOKEN");
     }
 }
