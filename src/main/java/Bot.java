@@ -117,16 +117,20 @@ public class Bot extends TelegramLongPollingBot {
                     }
                     try {
                         String[] weather;
+                        String folkWeather = "";
                         try {
                             weather = Weather.getWeather(message.getText(), model);
+                            folkWeather = FolkWeather.getWeather(message.getText());
 
                         } catch (IOException e) {
                             String city = Translate.translate(message.getText());
                             weather = Weather.getWeather(city, model);
+                            folkWeather = FolkWeather.getWeather(message.getText());
                         }
 
                         sendPicture(message, weather[0], weather[1]);
                         sendPicture(message, "\uD83D\uDC60 Советуем одеться примерно так", weather[2]);
+                        sendMessage(message, folkWeather);
                     } catch (IOException e) {
                         sendMessage(message, "\u274C Город не найден!");
                     }
@@ -140,11 +144,13 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     public String getBotToken() {
-        //        try {
-//            token = Files.readString(Paths.get("token.txt"));
+//        String token = "";
+//        try {
+//            token =  Files.readString(Paths.get("token.txt"));
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+//        return token;
         return System.getenv("TOKEN");
     }
 }

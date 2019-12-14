@@ -25,12 +25,14 @@ class Translate {
     }
 
     private static String getToken() {
-        //        try {
+//        String token = "";
+//        try {
 //            token = Files.readString(Paths.get("translateToken.txt"));
 //
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+//          return token;
         return System.getenv("TRANSLATE_TOKEN");
     }
 }
