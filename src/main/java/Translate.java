@@ -6,9 +6,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 class Translate {
     private static final String urlStr = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + Translate.getToken();
 
@@ -24,18 +21,18 @@ class Translate {
         String json = new java.util.Scanner(response).nextLine();
         int start = json.indexOf("[");
         int end = json.indexOf("]");
-        String translated = json.substring(start + 2, end - 1);
-        return translated;
+        return json.substring(start + 2, end - 1);
     }
 
     private static String getToken() {
-        String token = "";
+ /*       String token = "";
         try {
             token = Files.readString(Paths.get("translateToken.txt"));
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return token;
+          return token;*/
+        return System.getenv("TRANSLATE_TOKEN");
     }
 }

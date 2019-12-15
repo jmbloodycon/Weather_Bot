@@ -10,8 +10,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -119,16 +117,22 @@ public class Bot extends TelegramLongPollingBot {
                     }
                     try {
                         String[] weather;
+                        String folkWeather = "";
                         try {
                             weather = Weather.getWeather(message.getText(), model);
+                            folkWeather = FolkWeather.getWeather(message.getText());
 
                         } catch (IOException e) {
                             String city = Translate.translate(message.getText());
                             weather = Weather.getWeather(city, model);
+                            folkWeather = FolkWeather.getWeather(message.getText());
                         }
 
                         sendPicture(message, weather[0], weather[1]);
                         sendPicture(message, "\uD83D\uDC60 Советуем одеться примерно так", weather[2]);
+                        if (!folkWeather.equals("")) {
+                            sendMessage(message, folkWeather);
+                        }
                     } catch (IOException e) {
                         sendMessage(message, "\u274C Город не найден!");
                     }
@@ -142,12 +146,13 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     public String getBotToken() {
-        String token = "";
-        try {
-            token = Files.readString(Paths.get("token.txt"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return token;
+//        String token = "";
+//        try {
+//            token =  Files.readString(Paths.get("token.txt"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return token;
+        return System.getenv("TOKEN");
     }
 }
