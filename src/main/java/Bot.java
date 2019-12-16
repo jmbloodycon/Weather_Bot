@@ -12,6 +12,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Bot extends TelegramLongPollingBot {
     private HashMap<Long, String> lastMessage = new HashMap<>();
@@ -130,6 +131,11 @@ public class Bot extends TelegramLongPollingBot {
 
                         sendPicture(message, weather[0], weather[1]);
                         sendPicture(message, "\uD83D\uDC60 Советуем одеться примерно так", weather[2]);
+                        String op = getOppositeCity(weather[3]);
+                        String mes = "\uD83E\uDD76 Здесь слишком холодно. Как насчет перебраться сюда?\n" + op;
+                        if (!op.equals("")) {
+                            sendMessage(message, mes);
+                        }
                         if (!folkWeather.equals("")) {
                             sendMessage(message, folkWeather);
                         }
@@ -141,18 +147,39 @@ public class Bot extends TelegramLongPollingBot {
         }
     }
 
+    public String getOppositeCity(String sTemp) throws IOException {
+        HashMap<Integer,String> cities = new HashMap<Integer, String>();
+        cities.put(0, "Phuket");
+        cities.put(1, "Sochi");
+        cities.put(2, "Sydney");
+        cities.put(3, "Malaga");
+        cities.put(4, "Yalta");
+        double temp = Double.parseDouble(sTemp);
+        String[] oppositeCity;
+        String infoOpCity = "";
+        if (temp < -30){
+            Random rd = new Random();
+            int num = rd.nextInt(4);
+            String city = cities.get(num);
+            var mod = new Model();
+            oppositeCity = Weather.getWeather(city, mod);
+            infoOpCity = oppositeCity[0];
+        }
+        return infoOpCity;
+    }
+
     public String getBotUsername() {
         return "PopeelaBot";
     }
 
     public String getBotToken() {
-//        String token = "";
-//        try {
-//            token =  Files.readString(Paths.get("token.txt"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return token;
+        /*String token = "";
+        try {
+            token =  Files.readString(Paths.get("token.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return token;*/
         return System.getenv("TOKEN");
     }
 }

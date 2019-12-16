@@ -43,7 +43,8 @@ class Weather {
                 .get(model.getIcon());
         Clothes clothes =  new Clothes();
         String clothe = clothes.getIm(model.getId(), model.getSpeed(), model.getTemp());
+        String temp = model.getTemp().toString();
 
-        return (new String[] {info, icon, clothe});
+        return (new String[] {info, icon, clothe, temp});
     }
 }

@@ -25,7 +25,7 @@ class Translate {
     }
 
     private static String getToken() {
- /*       String token = "";
+        /*String token = "";
         try {
             token = Files.readString(Paths.get("translateToken.txt"));
 
